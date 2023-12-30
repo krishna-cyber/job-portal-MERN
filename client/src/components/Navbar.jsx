@@ -1,8 +1,10 @@
 /** @format */
 
 import { Button } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { AiOutlineMenu } from "react-icons/ai";
+import { IoMdClose } from "react-icons/io";
 const Navbar = () => {
   const navItems = [
     {
@@ -23,9 +25,11 @@ const Navbar = () => {
     },
   ];
 
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <header>
-      <nav className=' flex'>
+      <nav className=' flex justify-between'>
         <a
           href='/'
           className=' flex  items-center no-underline text-2xl text-black gap-2'>
@@ -47,23 +51,51 @@ const Navbar = () => {
           <span>Job Portal</span>
         </a>
         {/* Creating a navlinks  */}
-        <ul className='flex items-center gap-12 text-[1.2rem]'>
+        <ul className='hidden lg:flex items-center gap-12 text-[1.2rem]'>
           {navItems.map(({ name, path }) => (
             <li key={path} className=' list-none'>
               <NavLink
                 to={path}
-                className='text-black no-underline hover:text-blue-600'>
+                // 'text-black no-underline hover:text-blue-600'
+                className={({ isActive }) =>
+                  isActive
+                    ? "active no-underline text-blue-600"
+                    : " no-underline "
+                }>
                 {name}
               </NavLink>
             </li>
           ))}
-          <Button type='primary' className='rounded-md'>
+        </ul>
+        <div className='auth md:flex items-center gap-5 hidden'>
+          {" "}
+          <Button type={"default"} className='rounded-md'>
             Login
           </Button>
           <Button type='primary' className='rounded-md'>
             Register
           </Button>
-        </ul>
+        </div>
+
+        {/* making mobile menu  */}
+        <div className=' md:hidden'>
+          {/* if menu is open then show menu else hide menu */}
+          {menuOpen ? (
+            <Button
+              type='ghost'
+              className='rounded-md'
+              onClick={() => setMenuOpen(!menuOpen)}>
+              <IoMdClose size={25} />
+            </Button>
+          ) : (
+            <Button
+              type='ghost'
+              className='rounded-md'
+              onClick={() => setMenuOpen(!menuOpen)}>
+              <AiOutlineMenu size={25} />
+            </Button>
+          )}
+        </div>
       </nav>
     </header>
   );
