@@ -5,7 +5,6 @@ import Navbar from "./Navbar";
 import { Button, Input, Select } from "antd";
 
 import { CiSearch, CiLocationOn } from "react-icons/ci";
-import Tag11 from "./Tag11";
 
 const onSearch = (value) => console.log(value);
 const Header = () => {
@@ -55,7 +54,6 @@ const Header = () => {
           Search Jobs
         </Button>
       </div>
-      <Tag11 />
     </header>
   );
 };
