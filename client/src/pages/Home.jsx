@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Outlet } from "react-router-dom";
 import axios from "axios";
+import Main from "../components/Main";
 
 const Home = () => {
   const [jobs, setJobs] = useState([]);
@@ -24,6 +25,7 @@ const Home = () => {
   return (
     <>
       <Header />
+      <Main jobs={jobs} />
       <Outlet />
       <Footer />
     </>
