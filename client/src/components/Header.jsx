@@ -2,14 +2,13 @@
 
 import Navbar from "./Navbar";
 import { Button, Input, Select } from "antd";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { query } from "../features/search/searchSlice";
 
 import { CiSearch, CiLocationOn } from "react-icons/ci";
 import { useState } from "react";
 
 const Header = () => {
-  const searchTerms = useSelector((state) => state.query.query);
   const [searchTerm, setSearchTerm] = useState({
     search: "",
     location: [],
