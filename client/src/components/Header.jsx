@@ -1,15 +1,32 @@
 /** @format */
 
-import React from "react";
 import Navbar from "./Navbar";
 import { Button, Input, Select } from "antd";
+import { useSelector, useDispatch } from "react-redux";
+import { query } from "../features/search/searchSlice";
 
 import { CiSearch, CiLocationOn } from "react-icons/ci";
+import { useState } from "react";
 
-const onSearch = (value) => console.log(value);
 const Header = () => {
+  const searchTerms = useSelector((state) => state.query.query);
+  const [searchTerm, setSearchTerm] = useState({
+    search: "",
+    location: [],
+  });
+
+  const dispatch = useDispatch();
   const handleChange = (value) => {
     console.log(`selected ${value}`);
+    setSearchTerm((prevState) => ({
+      ...prevState,
+      location: value,
+    }));
+  };
+
+  const handleSubmit = () => {
+    console.log(searchTerms);
+    dispatch(query(searchTerm));
   };
   return (
     <header>
@@ -21,13 +38,18 @@ const Header = () => {
         Thousands of jobs in the computer, engineering and job you can search
         here.
       </p>
-      <div className=' flex flex-col gap-2 md:gap-0 md:flex-row  w-full'>
+      <form className=' flex flex-col gap-2 md:gap-1 md:flex-row  w-full'>
         <Input
           className=' rounded-none'
           placeholder={` Search for jobs, companies, and more...`}
           allowClear
           prefix={<CiSearch />}
-          onSearch={onSearch}
+          onChange={(e) => {
+            setSearchTerm((prevState) => ({
+              ...prevState,
+              search: e.target.value,
+            }));
+          }}
           size='large'
         />
 
@@ -50,10 +72,14 @@ const Header = () => {
             { value: "Seattle " },
           ]}
         />
-        <Button shape={"default"} size={"large"} type='primary'>
+        <Button
+          shape={"default"}
+          size={"large"}
+          type='primary'
+          onClick={handleSubmit}>
           Search Jobs
         </Button>
-      </div>
+      </form>
     </header>
   );
 };
