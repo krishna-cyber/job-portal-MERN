@@ -12,6 +12,30 @@ const Home = () => {
   const searchQuery = useSelector((state) => state.query.query);
   console.log(searchQuery);
 
+  //filtering jobs based on search query
+
+  const filterJobs = (jobs) => {
+    let filteredJobs;
+
+    if (searchQuery.search === "" && searchQuery.location.length === 0) {
+      filteredJobs = jobs;
+    } else if (searchQuery.search !== "" && searchQuery.location.length === 0) {
+      filteredJobs = jobs.filter((job) => {
+        return (
+          job.jobTitle
+            .toLowerCase()
+            .includes(searchQuery.search.toLowerCase()) ||
+          job.companyName
+            .toLowerCase()
+            .includes(searchQuery.search.toLowerCase())
+        );
+      });
+    }
+
+    //consoling filteredjobs
+    console.log(filteredJobs);
+  };
+
   const [jobs, setJobs] = useState([]);
   useEffect(() => {
     document.title = "Job Portal";
@@ -19,8 +43,7 @@ const Home = () => {
     axios
       .get("jobs.json")
       .then((response) => {
-        console.log(response.data);
-        setJobs(response.data);
+        filterJobs(response.data);
       })
       .catch((error) => {
         console.log(error);
