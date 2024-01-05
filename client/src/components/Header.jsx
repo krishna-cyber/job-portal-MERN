@@ -24,7 +24,6 @@ const Header = () => {
   };
 
   const handleSubmit = () => {
-    console.log(searchTerms);
     dispatch(query(searchTerm));
   };
   return (
