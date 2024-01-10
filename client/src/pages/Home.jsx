@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 const Home = () => {
   const searchQuery = useSelector((state) => state.query.query);
   console.log(searchQuery);
+  const [visibleJobs, setVisibleJobs] = useState([]); //visible jobs on the screen
 
   //filtering jobs based on search query
 
@@ -32,6 +33,7 @@ const Home = () => {
       });
     }
 
+    setVisibleJobs(filteredJobs);
     //consoling filteredjobs
     console.log(filteredJobs);
   };
@@ -52,7 +54,7 @@ const Home = () => {
   return (
     <>
       <Header />
-      <Main jobs={jobs} />
+      <Main jobs={visibleJobs} />
       <Outlet />
       <Footer />
     </>
