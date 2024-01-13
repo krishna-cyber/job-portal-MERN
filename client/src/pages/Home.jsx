@@ -32,10 +32,26 @@ const Home = () => {
         );
       });
     }
-
+    // filtering jobs based on location . location has array of locations
+    else if (searchQuery.search === "" && searchQuery.location.length !== 0) {
+      filteredJobs = jobs.filter((job) => {
+        return searchQuery.location.includes(job.jobLocation);
+      });
+      console.log(filteredJobs);
+    } else if (searchQuery.search !== "" && searchQuery.location.length !== 0) {
+      filteredJobs = jobs.filter((job) => {
+        return (
+          (job.jobTitle
+            .toLowerCase()
+            .includes(searchQuery.search.toLowerCase()) ||
+            job.companyName
+              .toLowerCase()
+              .includes(searchQuery.search.toLowerCase())) &&
+          searchQuery.location.includes(job.jobLocation)
+        );
+      });
+    }
     setVisibleJobs(filteredJobs);
-    //consoling filteredjobs
-    console.log(filteredJobs);
   };
 
   const [jobs, setJobs] = useState([]);
