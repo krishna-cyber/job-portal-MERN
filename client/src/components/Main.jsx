@@ -4,28 +4,13 @@ import { Card, Avatar, Button, Divider, Flex, Radio } from "antd";
 const { Meta } = Card;
 import { IoLocationOutline, IoTimeOutline } from "react-icons/io5";
 import { CiDollar, CiCalendarDate } from "react-icons/ci";
+import Filter from "./Filter";
 const Main = ({ jobs }) => {
-  const [size, setSize] = useState("large");
   console.log(jobs);
   return (
     <>
       <main className=' flex justify-between gap-3'>
-        <aside className=' w-[30%] flex flex-col gap-2'>
-          <h1>Filters</h1>
-          <Card title='Location' bordered={false}>
-            Location
-          </Card>
-          <Card title='Salary' bordered={false}>
-            <Radio.Group value={size} onChange={(e) => setSize(e.target.value)}>
-              <Radio.Button value='large'>Hourly</Radio.Button>
-              <Radio.Button value='default'>Monthly</Radio.Button>
-              <Radio.Button value='small'>Yearly</Radio.Button>
-            </Radio.Group>
-          </Card>
-          <Card title='Date of posting' bordered={false}>
-            Date of posting
-          </Card>
-        </aside>
+        <Filter />
 
         <div className='center'>
           {" "}
