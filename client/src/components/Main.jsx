@@ -5,6 +5,7 @@ const { Meta } = Card;
 import { IoLocationOutline, IoTimeOutline } from "react-icons/io5";
 import { CiDollar, CiCalendarDate } from "react-icons/ci";
 import Filter from "./Filter";
+import Subscribe from "./Subscribe";
 const Main = ({ jobs }) => {
   console.log(jobs);
   return (
@@ -47,9 +48,7 @@ const Main = ({ jobs }) => {
             </Card>
           ))}
         </div>
-        <aside>
-          <h1>subscribe</h1>
-        </aside>
+        <Subscribe />
       </main>
     </>
   );
